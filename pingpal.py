@@ -23,6 +23,11 @@ async def dm(ctx, role:discord.Role, *, message):
     for member in role.members:
         await member.send(embed=embed)
 
+@bot.command()
+async def assign(ctx, *, role:discord.Role):
+    for member in ctx.guild.members:
+        await member.add_roles(role)
+
 
 
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
