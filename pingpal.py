@@ -25,6 +25,12 @@ async def dm(ctx, role:discord.Role, *, message):
         await member.send(embed=embed)
 
 @bot.command()
+async def dmuser(ctx, user:discord.Member, *, message):
+    embed = discord.Embed(title=message)
+    await user.send(embed=embed)
+
+
+@bot.command()
 async def assign(ctx, *, role:discord.Role):
     for member in ctx.guild.members:
         await member.add_roles(role)
