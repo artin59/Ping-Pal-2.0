@@ -19,21 +19,32 @@ bot = commands.Bot(command_prefix='baller', intents=intents)
 
 @bot.command()
 async def dm(ctx, role:discord.Role, *, message):
+
+    message = message + '\n' + "From: " + str(ctx.guild) + '\n' + "By: " + str(ctx.author)
     embed = discord.Embed(title=message)
 
     for member in role.members:
         await member.send(embed=embed)
 
+    await ctx.channel.send('DMs Sent Successfully')
+
+
 @bot.command()
 async def dmuser(ctx, user:discord.Member, *, message):
-    embed = discord.Embed(title=message)
-    await user.send(embed=embed)
 
+    message = message + '\n' + "From: " + str(ctx.guild) + '\n' + "By: " + str(ctx.author)
+    embed = discord.Embed(title=message)
+
+    await user.send(embed=embed)
+    await ctx.channel.send('DM Sent Successfully')
 
 @bot.command()
 async def assign(ctx, *, role:discord.Role):
-    for member in ctx.guild.members:
+
+    for member in ctx.channel.members:
         await member.add_roles(role)
+
+    await ctx.channel.send('All Roles Assigned Successfully')
 
 
 
